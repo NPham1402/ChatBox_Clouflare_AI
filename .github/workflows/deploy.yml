@@ -26,7 +26,6 @@ jobs:
         with:
           node-version: '20'
       - run: npm install
-      - run: npm run build
       - uses: actions/upload-artifact@v4
         with:
           name: backend-build
@@ -43,7 +42,9 @@ jobs:
       - run: npm install
       - uses: cloudflare/wrangler-action@v3
         with:
+          config: wrangler-backend.jsonc
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy src/index.ts
 
   deploy-frontend:
     needs: build-frontend
@@ -54,8 +55,8 @@ jobs:
         with:
           name: frontend-build
           path: dist/
-      - run: ls -la dist/
       - uses: cloudflare/wrangler-action@v3
         with:
+          config: wrangler-frontend.jsonc
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy dist
+          command: pages deploy dist --project-name=llm-chat-app-frontend

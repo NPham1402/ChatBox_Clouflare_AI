@@ -1,0 +1,18 @@
+/**
+ * Backend Worker Configuration
+ * Deploy to: Cloudflare Workers
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "llm-chat-app-backend",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-10-08",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "upload_source_maps": true
+}
