@@ -44,7 +44,6 @@ jobs:
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: deploy --minify
 
   deploy-frontend:
     needs: build-frontend
@@ -55,7 +54,8 @@ jobs:
         with:
           name: frontend-build
           path: dist/
+      - run: ls -la dist/
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy dist/ --project-name=llm-chat-app-frontend
+          command: pages deploy dist
