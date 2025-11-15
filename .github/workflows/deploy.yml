@@ -42,8 +42,8 @@ jobs:
       - run: npm install
       - uses: cloudflare/wrangler-action@v3
         with:
-          config: wrangler-backend.jsonc
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy --config wrangler-backend.jsonc
 
   deploy-frontend:
     needs: build-frontend
@@ -56,6 +56,5 @@ jobs:
           path: dist/
       - uses: cloudflare/wrangler-action@v3
         with:
-          config: wrangler-frontend.jsonc
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy dist --project-name=llm-chat-app-frontend
+          command: pages deploy dist --project-name=llm-chat-app-frontend --config wrangler-frontend.jsonc
