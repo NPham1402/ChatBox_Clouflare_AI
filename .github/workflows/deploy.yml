@@ -44,7 +44,6 @@ jobs:
         with:
           config: wrangler-backend.jsonc
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: deploy src/index.ts
 
   deploy-frontend:
     needs: build-frontend
